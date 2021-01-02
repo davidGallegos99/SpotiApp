@@ -1,0 +1,19 @@
+<div class="row justify-content-center">
+    <div class="col-md-11">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <h1 class="display-4 text-center pb-3">#New Releases</h1>
+            </div>
+        </div>
+        <div class="card-columns mt-5">
+            <div class="card" *ngFor="let cancion of newReleases">
+              <img [src]="cancion.images[0].url" class="card-img-top" title="{{cancion.name}}" alt="">
+              <div class="card-body ">
+                <h5 class="card-title">{{cancion.name}} - {{cancion.release_date}}</h5>
+                <p class="lead text-secondary" style="font-weight: 600;">Artistas</p>
+                <span class="badge badge-pill badge-primary " *ngFor="let artista of cancion.artists">{{artista.name}}</span>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
