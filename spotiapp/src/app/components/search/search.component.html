@@ -1,9 +1,23 @@
 <div class="row justify-content-center">
     <div class="col-10">
-        <h1 class="display-4 text-center">Buscar Artista</h1>
+        <h1 class="display-4 text-center text-light">Buscar Artista</h1>
         <div class="row mt-5">
             <div class="col-md-12">
                 <input type="text" #termino (keyup)="buscarArtista(termino.value)" placeholder="Buscar..." class="form-control">
+            </div>
+        </div>
+        <div *ngIf="cargando" class="row justify-content-center mt-5 pt-5">
+            <div class="col-md-12">
+                <nz-spin nzSimple  [nzSize]="'large'" class="text-center"></nz-spin>
+            </div>
+        </div>
+        <div class="card-columns mt-5" *ngIf="!cargando">
+            <div class="card" *ngFor="let artista of artistas">
+              <img [src]="artista.images[0].url" class="card-img-top" title="{{artista.name}}" alt="">
+              <div class="card-body ">
+                <h5 class="card-title">{{artista.name}}</h5>
+                
+              </div>
             </div>
         </div>
     </div>

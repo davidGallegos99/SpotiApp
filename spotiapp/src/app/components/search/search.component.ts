@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { SpotifyService } from 'src/app/services/spotify.service';
 
 @Component({
@@ -7,7 +8,9 @@ import { SpotifyService } from 'src/app/services/spotify.service';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  private time:any;
+  public time:any;
+  public cargando=false;
+  public artistas:any = [];
   constructor(private spotify:SpotifyService) { }
 
   ngOnInit(): void {
@@ -15,11 +18,16 @@ export class SearchComponent implements OnInit {
   buscarArtista(artista:string){
     if(artista.length>0){
       clearTimeout(this.time);
+      this.cargando = true;
       this.time = setTimeout(() => {
-        this.spotify.getArtist(artista).subscribe((artista)=>{
-          console.log(artista);
+        this.spotify.getArtist(artista).subscribe((artista:any)=>{
+          this.artistas = artista;
+          console.log(this.artistas);
+          if(this.artistas.length>0){
+            this.cargando=false;
+          }
         });
-      }, 3000);
+      }, 1000);
     }
   }
 
