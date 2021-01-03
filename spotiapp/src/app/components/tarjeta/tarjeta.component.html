@@ -1,0 +1,7 @@
+      <img [src]="data.images | noimage" class="card-img-top" title="{{data.name}}" alt="">
+      <div class="card-body ">
+        <h5 class="card-title">{{data.name}} - {{data.release_date}}</h5>
+        <div *ngIf="artista">
+            <span class="badge badge-pill badge-primary " *ngFor="let artista of data.artists">{{artista.name}}</span>
+        </div>
+      </div>
