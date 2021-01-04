@@ -17,3 +17,35 @@
         <button class="btn btn-outline-danger" routerLink="/search">Regresar</button>
     </div>
 </div>
+<div *ngIf="!cargando" class="row justify-content-center mt-5">
+    <div class="col-md-12 table-responsive">
+        <table class="table text-light">
+            <thead>
+                <tr >
+                    <th class="py-3" style="width: 170px;">Foto</th>
+                    <th class="py-3">Album</th>
+                    <th class="py-3">Cancion</th>
+                    <th class="py-3">Vista previa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf='cargando'>
+                    <td colspan="4" class="text-center">
+                        <div   class="animated fadeIn row text-center justify-content-center">
+                            <div class="col-md-12 mt-5 py-5">
+                                <nz-spin nzSimple  [nzSize]="'large'" class="text-center"></nz-spin>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngFor="let track of topTracks" class="py-3 animated fadeIn">
+                    <td class="py-3"><img [src]="track.album.images | noimage" style="border: 1px solid white;" class="img-thumb" alt=""></td>
+                    <td class="py-3">{{track.album.name}}</td>
+                    <td class="py-3">{{track.name}}</td>
+                    <td class="py-3"><iframe [src]="track.uri | domsecure" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></td>
+                    <!-- <td class="py-3"><audio [src]="track.preview_url" controls></audio></td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

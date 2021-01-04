@@ -11,6 +11,7 @@ import { ArtistaComponent } from './components/artista/artista.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NoimagePipe } from './pipes/noimage.pipe';
 import { TarjetaComponent } from './components/tarjeta/tarjeta.component';
+import { DomsecurePipe } from './pipes/domsecure.pipe';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { TarjetaComponent } from './components/tarjeta/tarjeta.component';
     NavbarComponent,
     NoimagePipe,
     TarjetaComponent,
+    DomsecurePipe,
     
   ],
   imports: [
