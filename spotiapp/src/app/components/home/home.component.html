@@ -5,13 +5,13 @@
                 <h1 class="display-4 text-center pb-3 text-light">#New Releases</h1>
             </div>
         </div>
-        <div *ngIf="cargando" class="row justify-content-center mt-5 pt-5">
+        <div *ngIf="cargando" class="row animated fadeIn justify-content-center mt-5 pt-5">
             <div class="col-md-12">
                 <nz-spin nzSimple  [nzSize]="'large'" class="text-center"></nz-spin>
             </div>
         </div>
-        <div *ngIf="!cargando" class="card-columns mt-5">
-         <app-tarjeta [data]="cancion" class="card" *ngFor="let cancion of newReleases"></app-tarjeta>
+        <div *ngIf="!cargando" class="animated fadeIn card-columns mt-5">
+         <app-tarjeta (click)="verArtista(cancion)" [data]="cancion" class="card puntero" *ngFor="let cancion of newReleases"></app-tarjeta>
         </div>
     </div>
 </div>

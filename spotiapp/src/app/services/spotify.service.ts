@@ -1,4 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Injectable } from '@angular/core';
 import {map} from 'rxjs/operators';
 @Injectable({
@@ -6,9 +7,14 @@ import {map} from 'rxjs/operators';
 })
 export class SpotifyService {
   private headers = new HttpHeaders({
-    'Authorization':'Bearer BQCp1RkQHZacFjGTuY1oSMY5vgDujaUP2G24OJDutx7mM0PxI81hz3AKTh2Feo4rcITibgZ07qg3IU2p9c0'
+    'Authorization':'Bearer BQAcb_lRWWbKKyGSP5n9ZWZ87yc0X0pE0Z50d-IgJ-tQVEAXxWurK8tUGtTs9q_1g9KLE0xH2KcTp4bYqxM'
   });
-  constructor(private http:HttpClient) { }
+  private id:string = '';
+  constructor(
+    private http:HttpClient,
+    ) {
+
+     }
   getNewReleases(){
     return this.http.get('https://api.spotify.com/v1/browse/new-releases',{headers:this.headers})
                     .pipe(map((data:any)=>{
@@ -20,5 +26,10 @@ export class SpotifyService {
                     .pipe(map((data:any)=>{
                       return data.artists.items;
                     }));
+   }
+   jalarArtista(id:string){
+     console.log(id);
+    return this.http.get(`https://api.spotify.com/v1/artists/${id}`,{headers:this.headers});
+
    }
 }

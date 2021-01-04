@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {Router} from '@angular/router';
 import { SpotifyService } from 'src/app/services/spotify.service';
 
 @Component({
@@ -11,7 +11,10 @@ export class SearchComponent implements OnInit {
   public time:any;
   public cargando=false;
   public artistas:any = [];
-  constructor(private spotify:SpotifyService) { }
+  constructor(
+    private spotify:SpotifyService,
+    private _router:Router
+    ) { }
 
   ngOnInit(): void {
   }
@@ -22,7 +25,6 @@ export class SearchComponent implements OnInit {
       this.time = setTimeout(() => {
         this.spotify.getArtist(artista).subscribe((artista:any)=>{
           this.artistas = artista;
-          console.log(this.artistas);
           if(this.artistas.length>0){
             this.cargando=false;
           }
@@ -30,5 +32,10 @@ export class SearchComponent implements OnInit {
       }, 1000);
     }
   }
+  verArtista(item:any){
+    console.log(item);
+    console.log(item.id);
+    this._router.navigate(['artista',item.id]);
+   }
 
 }

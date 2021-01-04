@@ -6,13 +6,13 @@
                 <input type="text" #termino (keyup)="buscarArtista(termino.value)" placeholder="Buscar..." class="form-control">
             </div>
         </div>
-        <div *ngIf="cargando" class="row justify-content-center mt-5 pt-5">
+        <div *ngIf="cargando" class="row animated fadeIn justify-content-center mt-5 pt-5">
             <div class="col-md-12">
                 <nz-spin nzSimple  [nzSize]="'large'" class="text-center"></nz-spin>
             </div>
         </div>
-        <div class="card-columns mt-5" *ngIf="!cargando">
-           <app-tarjeta class="card" [data]="artista" *ngFor="let artista of artistas"></app-tarjeta>
+        <div class="card-columns mt-5 animated fadeIn" *ngIf="!cargando">
+           <app-tarjeta (click)="verArtista(artista)" class="card puntero" [data]="artista" *ngFor="let artista of artistas"></app-tarjeta>
         </div>
     </div>
 </div>

@@ -1,1 +1,19 @@
-<p>artista works!</p>
+<div *ngIf="cargando"  class="animated fadeIn row justify-content-center mt-5 pt-5">
+    <div class="col-md-12 mt-5 py-5">
+        <nz-spin nzSimple  [nzSize]="'large'" class="text-center mt-5 py-5"></nz-spin>
+    </div>
+</div>
+<div *ngIf="!cargando" class="row animated fadeIn justify-content-center">
+    <div class="col-md-2">
+        <img [src]="artista.images | noimage" class="img-thumbnail img-circle" alt="">
+    </div>
+    <div class="col">
+        <h3 class="display-5 text-light">{{artista.name}}</h3>
+        <p>
+            <a [href]="artista.external_urls.spotify" target="_blank">Ir a la pagina del artista</a>
+        </p>
+    </div>
+    <div class="col-md-4 tex-right">
+        <button class="btn btn-outline-danger" routerLink="/search">Regresar</button>
+    </div>
+</div>
