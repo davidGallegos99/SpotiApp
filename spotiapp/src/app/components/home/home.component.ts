@@ -9,7 +9,9 @@ import { SpotifyService } from 'src/app/services/spotify.service';
 })
 export class HomeComponent implements OnInit {
   public newReleases: any;
+  public alert_error:boolean = false;
   public cargando:boolean = true;
+  public error_message:string ='';
   constructor(private spotify:SpotifyService,private _router:Router) { }
 
   ngOnInit(): void {
@@ -18,6 +20,11 @@ export class HomeComponent implements OnInit {
       if(this.newReleases.length>0) {
         this.cargando=false;
       }
+    },(error)=>{
+      this.alert_error = true;
+      this.cargando = false;
+      this.error_message = error.error.error.message;
+      console.log(error);
     });
   }
   verArtista(item:any){

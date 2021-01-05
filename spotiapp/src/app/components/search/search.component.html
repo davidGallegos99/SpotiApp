@@ -1,11 +1,13 @@
 <div class="row justify-content-center">
     <div class="col-10">
         <h1 class="display-4 text-center text-light">Buscar Artista</h1>
+        <nz-alert *ngIf="alert_message" nzType="error" class="mt-5" nzMessage="Error" [nzDescription]="error_message" nzShowIcon> </nz-alert>
         <div class="row mt-5">
             <div class="col-md-12">
                 <input type="text" #termino (keyup)="buscarArtista(termino.value)" placeholder="Buscar..." class="form-control">
             </div>
         </div>
+
         <div *ngIf="cargando && !error_busqueda" class="row animated fadeIn justify-content-center mt-5 pt-5">
             <div class="col-md-12">
                 <nz-spin nzSimple  [nzSize]="'large'" class="text-center"></nz-spin>

@@ -5,6 +5,7 @@
                 <h1 class="display-4 text-center pb-3 text-light">#New Releases</h1>
             </div>
         </div>
+        <nz-alert *ngIf="alert_error" nzType="error" nzMessage="Error" [nzDescription]="error_message" nzShowIcon> </nz-alert>
         <div *ngIf="cargando" class="row animated fadeIn justify-content-center mt-5 pt-5">
             <div class="col-md-12">
                 <nz-spin nzSimple  [nzSize]="'large'" class="text-center"></nz-spin>

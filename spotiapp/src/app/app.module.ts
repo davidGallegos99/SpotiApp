@@ -12,7 +12,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { NoimagePipe } from './pipes/noimage.pipe';
 import { TarjetaComponent } from './components/tarjeta/tarjeta.component';
 import { DomsecurePipe } from './pipes/domsecure.pipe';
-
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,9 +30,12 @@ import { DomsecurePipe } from './pipes/domsecure.pipe';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NzSpinModule
+    NzSpinModule,
+    NzAlertModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [BrowserModule,BrowserAnimationsModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

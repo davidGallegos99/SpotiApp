@@ -9,6 +9,8 @@ import { SpotifyService } from 'src/app/services/spotify.service';
 })
 export class SearchComponent implements OnInit {
   public time:any;
+  public alert_message:boolean =false;
+  public error_message:string = '';
   public error_busqueda:boolean = false;
   public cargando=false;
   public artistas:any = [];
@@ -32,6 +34,10 @@ export class SearchComponent implements OnInit {
           }else{
             this.error_busqueda = true;
           }
+        },(error)=>{
+          this.cargando = false;
+          this.alert_message = true;
+          this.error_message = error.error.error.message;
         });
       }, 1000);
     }
