@@ -1,0 +1,44 @@
+<div class="row justify-content-center mt-5">
+    <div class="col-md-12 mt-4">
+        <div class="row">
+            <div class="col-md-4 order-2 order-md-1">
+                <img [src]="album.images | noimage" class="img-fluid img-album" alt="">
+            </div>
+            <div class="col-md-8 pl-5 titulo order-1 order-md-2 mb-4 mb-md-0">
+                <p class="text-left text-light lead">albúm</p>
+                <h1 class="display-5 text-light ">{{album.name}}</h1>
+                <span *ngFor="let artista of album.artists" class="badge badge-pill badge-success">{{artista.name}}</span>
+                <nz-badge nzStatus="default" class="ml-2 mr-1"></nz-badge>
+                <span class="">{{album.release_date}}</span>
+                <nz-badge nzStatus="default" class="ml-2 mr-1"></nz-badge>
+                <span>{{album.total_tracks}} canciones</span>,
+                <span> {{duration.toFixed(1)}} minutos</span>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5 pt-5">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table text-light">
+                        <tbody>
+                            <tr *ngIf='cargando'>
+                                <td colspan="4" class="text-center">
+                                    <div   class="animated fadeIn row text-center justify-content-center">
+                                        <div class="col-md-12 mt-5 py-5">
+                                            <nz-spin nzSimple  [nzSize]="'large'" class="text-center"></nz-spin>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let track of tracks" class="py-3 animated fadeIn hover ">
+                                <td class="py-2">{{track.name}}</td>
+                                <td class="py-2">
+                                    <iframe [src]="track.uri | domsecure" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>                                
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

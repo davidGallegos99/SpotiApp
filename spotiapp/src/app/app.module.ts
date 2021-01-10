@@ -1,7 +1,10 @@
+import "@angular/compiler";
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +16,10 @@ import { NoimagePipe } from './pipes/noimage.pipe';
 import { TarjetaComponent } from './components/tarjeta/tarjeta.component';
 import { DomsecurePipe } from './pipes/domsecure.pipe';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AlbumComponent } from './components/album/album.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +30,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NoimagePipe,
     TarjetaComponent,
     DomsecurePipe,
+    AlbumComponent,
     
   ],
   imports: [
@@ -32,7 +39,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     NzSpinModule,
     NzAlertModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NzCardModule,
+    NzBadgeModule
   ],
   providers: [BrowserModule,BrowserAnimationsModule
   ],

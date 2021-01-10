@@ -9,6 +9,7 @@ import { SpotifyService } from 'src/app/services/spotify.service';
 })
 export class SearchComponent implements OnInit {
   public time:any;
+  public value:string = '';
   public alert_message:boolean =false;
   public error_message:string = '';
   public error_busqueda:boolean = false;

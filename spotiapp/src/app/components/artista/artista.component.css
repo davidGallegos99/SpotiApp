@@ -1,0 +1,16 @@
+.more{
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: -30px;
+}
+.hover{
+    opacity: 0;
+}
+.hover:hover{
+    opacity: 0;
+    background-color: rgb(170, 177, 184);
+}
+.moreAlbums:hover{  
+    text-decoration: underline;
+    
+}

@@ -17,12 +17,17 @@
         <button class="btn btn-outline-danger" routerLink="/search">Regresar</button>
     </div>
 </div>
-<div *ngIf="!cargando" class="row justify-content-center mt-5">
+<div class="row mt-5">
+    <div class="col-md-12">
+        <h3 class="display-6 text-light">Populares</h3>
+    </div>
+</div>
+<div *ngIf="!cargando" class="row justify-content-center mt-3">
     <div class="col-md-12 table-responsive">
         <table class="table text-light">
             <thead>
                 <tr >
-                    <th class="py-3" style="width: 170px;">Foto</th>
+                    <th class="py-3" style="width: 100px;">Portada</th>
                     <th class="py-3">Album</th>
                     <th class="py-3">Cancion</th>
                     <th class="py-3">Vista previa</th>
@@ -38,14 +43,58 @@
                         </div>
                     </td>
                 </tr>
-                <tr *ngFor="let track of topTracks" class="py-3 animated fadeIn">
-                    <td class="py-3"><img [src]="track.album.images | noimage" style="border: 1px solid white;" class="img-thumb" alt=""></td>
-                    <td class="py-3">{{track.album.name}}</td>
-                    <td class="py-3">{{track.name}}</td>
-                    <td class="py-3"><iframe [src]="track.uri | domsecure" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></td>
-                    <!-- <td class="py-3"><audio [src]="track.preview_url" controls></audio></td> -->
-                </tr>
+                <ng-container *ngFor="let track of topTracks;let i = index">
+                    <tr *ngIf="i<5 && !allTracks"  class="py-3  animated fadeIn hover">
+                        <td class="py-3"><img [src]="track.album.images | noimage" style="border: 1px solid white;" class="img-thumb" alt=""></td>
+                        <td class="py-3">{{track.album.name}}</td>
+                        <td class="py-3">{{track.name}}</td>
+                        <td class="py-3"><iframe [src]="track.uri | domsecure" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></td>
+                        <!-- <td class="py-3"><audio [src]="track.preview_url" controls></audio></td> -->
+                    </tr>
+                    <tr *ngIf="allTracks"  class="py-3 animated  fadeIn hover">
+                        <td class="py-3"><img [src]="track.album.images | noimage" style="border: 1px solid white;" class="img-thumb" alt=""></td>
+                        <td class="py-3">{{track.album.name}}</td>
+                        <td class="py-3">{{track.name}}</td>
+                        <td class="py-3"><iframe [src]="track.uri | domsecure" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></td>
+                        <!-- <td class="py-3"><audio [src]="track.preview_url" controls></audio></td> -->
+                    </tr>
+                </ng-container>
             </tbody>
         </table>
+        <p (click)="showAllTracks()" *ngIf="!allTracks" class="lead more text-primary">Ver mas canciones</p>
+        <p (click)="showFewTracks()" *ngIf="allTracks" class="lead more text-primary">Ver menos canciones</p>
     </div>
+</div>
+
+<div class="row mt-4 mb-3">
+    <div class="col-md-12">
+        <h3 class="display-6 text-light">Albumes</h3>
+        <a class="float-right lead text-light moreAlbums" *ngIf="!allAlbums" (click)="showAllAlbums()">Ver mas</a>
+        <a class="float-right lead text-light moreAlbums" *ngIf="allAlbums" (click)="shoFewAlbums()">Ver menos</a>
+    </div>
+</div>
+<div *ngIf='cargando'  class="animated fadeIn row text-center justify-content-center">
+    <div class="col-md-12 mt-5 py-5">
+        <nz-spin nzSimple  [nzSize]="'large'" class="text-center"></nz-spin>
+    </div>
+</div>
+<div *ngIf='!cargando'  class="row justify-content-center">
+    <ng-container  *ngFor="let album of albums; let i = index" >
+        <div class="col-9 col-md-4 mb-4 animated fadeIn" *ngIf="i<3" (click)="verAlbum(album.id)"> 
+              <nz-card nzHoverable [nzCover]="coverTemplate">
+                <nz-card-meta [nzTitle]="album.name" [nzDescription]="album.release_date"></nz-card-meta>
+              </nz-card>
+              <ng-template #coverTemplate>
+                <img alt="example" class="img-thumbnail img-fluid" [src]="album.images | noimage" />
+            </ng-template>
+        </div>
+        <div class="col-9 col-md-4 mb-4 animated fadeIn" *ngIf="allAlbums" (click)="verAlbum(album.id)"> 
+            <nz-card nzHoverable [nzCover]="coverTemplate">
+              <nz-card-meta [nzTitle]="album.name" [nzDescription]="album.release_date"></nz-card-meta>
+            </nz-card>
+            <ng-template #coverTemplate>
+              <img alt="example" class="img-thumbnail img-fluid" [src]="album.images | noimage" />
+          </ng-template>
+      </div>
+    </ng-container>
 </div>

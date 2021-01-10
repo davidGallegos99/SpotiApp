@@ -11,6 +11,9 @@ import { Route } from '@angular/compiler/src/core';
 })
 export class ArtistaComponent implements OnInit {
   public id:string = '';
+  public albums:any = [];
+  public allTracks:boolean = false;
+  public allAlbums:boolean = false;
   public artista:any;
   public topTracks:any = [];
   public cargando:boolean = true;
@@ -19,10 +22,17 @@ export class ArtistaComponent implements OnInit {
       this.id = params.id;
       this.getArtist();
       this.getTopTracks();
+      this.getArtistAlbums(params.id);
     });
    }
 
   ngOnInit(): void {
+  }
+  showAllAlbums(){
+    this.allAlbums=true;
+  }
+  shoFewAlbums(){
+    this.allAlbums=false;
   }
   getArtist(){
     this.spotify.jalarArtista(this.id).subscribe((data)=>{
@@ -30,7 +40,6 @@ export class ArtistaComponent implements OnInit {
       if(this.artista){
         this.cargando = false;
       }
-      console.log(this.artista);
     }, err =>{
       this._router.navigate(['home']);
     });
@@ -44,9 +53,24 @@ export class ArtistaComponent implements OnInit {
         uri = 'https://open.spotify.com/embed'+uri;
         track.uri = uri;
       });
-      console.log('Tracks: ',tracks);
         this.topTracks = tracks;
     });
+  }
+  getArtistAlbums(id:string){
+    this.spotify.getArtistAlbums(id).subscribe(albums=>{
+      console.log(albums);
+      this.albums = albums;
+    });
+  }
+  verAlbum(id:string){
+    this._router.navigate(['album',id]);
+  }
+  showAllTracks(){
+    console.log('ta bien');
+    this.allTracks = true;
+  }
+  showFewTracks(){
+    this.allTracks = false;
   }
 
 }

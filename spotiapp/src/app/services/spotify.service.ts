@@ -6,7 +6,7 @@ import {map} from 'rxjs/operators';
 })
 export class SpotifyService {
   private headers = new HttpHeaders({
-    'Authorization':'Bearer BQCtqpGRkK9ijmVqCpDq80w5avBLMyaJZsVTIL4v686XZoZcgkWpAF-CpUnZmu1dqUujnSAuxbf6NVzGbq8'
+    'Authorization':'Bearer BQDOvMIKK3wsXcNlcIwvEBuScav6byb1_45lsfTBzW_8pBGi0T21TaPLLDJ7evZ9wqjuPGHQiLiWaEaZJMA'
   });
   private id:string = '';
   constructor(
@@ -36,5 +36,15 @@ export class SpotifyService {
                     .pipe(map((data:any)=>{
                       return data.tracks;
                     }));
+   }
+   getArtistAlbums(idArtist:string){
+      return this.http.get(`https://api.spotify.com/v1/artists/${idArtist}/albums?market=US`,{headers:this.headers})
+                      .pipe(map((data:any)=>{
+                        return data.items;
+                      }));
+   }
+   getAlbum(id:string){ 
+     return this.http.get(`https://api.spotify.com/v1/albums/${id}?market=US`,{headers:this.headers});
+
    }
 }
