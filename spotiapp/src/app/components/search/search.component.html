@@ -1,21 +1,55 @@
+<div class="row search">
+    <div class=" col-md-12 px-5">
+        <div class="form-group">
+            <p for="" class="lead text-center">Buscar</p>
+            <input type="text" #termino (keyup)="buscarArtista(termino.value)" placeholder="Buscar..." class="form-control">
+        </div>
+    </div>
+</div>
+<!-- Canciones -->
+<div class="row mb-5 justify-content-center" *ngIf="items.tracks && !noTracks && !cargando">
+    <div class="col-12 col-xs-12  col-sm-12 col-md-6 pt-5">
+        <div class= "cancion table-responsive">
+            <iframe [src]="tracks[0].uri | domsecure" width="85%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            <p class="mt-3 ">{{tracks[0].album.name}} - {{tracks[0].album.total_tracks}} canciones</p>
+        </div>
+    </div>
+    <div class="col-md-6 pt-3" >
+        <p class="lead">Canciones</p>
+        <div class="table-responsive canciones border-light">
+            <table class="table">
+                <tbody>
+                    <tr *ngFor="let track of tracks">
+                        <td class="text-light">{{track.name}}</td>
+                        <td><iframe [src]="track.uri | domsecure" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 <div class="row justify-content-center">
     <div class="col-10">
-        <h1 class="display-4 text-center text-light">Buscar Artista</h1>
         <nz-alert *ngIf="alert_message" nzType="error" class="mt-5" nzMessage="Error" [nzDescription]="error_message" nzShowIcon> </nz-alert>
-        <div class="row mt-5">
-            <div class="col-md-12">
-                <input type="text" #termino (keyup)="buscarArtista(termino.value)" placeholder="Buscar..." class="form-control">
-            </div>
-        </div>
-
+        <!-- Alerta de error por si sale algo mal en la llamada a la API -->
         <div *ngIf="cargando && !error_busqueda" class="row animated fadeIn justify-content-center mt-5 pt-5">
             <div class="col-md-12">
                 <nz-spin nzSimple  [nzSize]="'large'" class="text-center"></nz-spin>
             </div>
         </div>
+        <!-- Mensaje de no resultados -->
         <h1 *ngIf="error_busqueda" class="lead text-center text-light mt-5">No se encontraron resultados</h1>
+        
+        <!-- Artsitas -->
+        <h1 *ngIf="items.artists && !noArtists && !cargando" class="display-5 text-light text-left">Artistas</h1>
         <div class="card-columns mt-5 animated fadeIn" *ngIf="!cargando && !error_busqueda">
-           <app-tarjeta (click)="verArtista(artista)" class="card puntero" [data]="artista" *ngFor="let artista of artistas"></app-tarjeta>
+            <app-tarjeta (click)="verArtista(artista)" class="card puntero" [data]="artista" *ngFor="let artista of items.artists.items"></app-tarjeta>
         </div>
+        <!-- Podcasts -->
+        <h1 *ngIf="items.shows && !noPodcasts && !cargando" class="display-5 text-light text-left">Podcasts</h1>
+        <div class="card-columns mt-5 animated fadeIn" *ngIf="!cargando && !error_busqueda">
+            <app-tarjeta  class="card puntero" [data]="show" *ngFor="let show of items.shows.items"></app-tarjeta>
+        </div>
+
     </div>
 </div>

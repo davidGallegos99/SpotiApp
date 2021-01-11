@@ -6,7 +6,9 @@ import {map} from 'rxjs/operators';
 })
 export class SpotifyService {
   private headers = new HttpHeaders({
-    'Authorization':'Bearer BQDOvMIKK3wsXcNlcIwvEBuScav6byb1_45lsfTBzW_8pBGi0T21TaPLLDJ7evZ9wqjuPGHQiLiWaEaZJMA'
+    'Authorization':'Bearer BQATgi1RQvWcnLEwCMJAEQV6cKFfI9Gm965F3BgaUcSf2leGEEVfD9zhEj-NZjv8M-va-_0g0h0ca0MWOEU',
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
   });
   private id:string = '';
   constructor(
@@ -20,11 +22,9 @@ export class SpotifyService {
                         return data.albums.items;
                     }))
   }
-  getArtist(artista:string){
-    return this.http.get(`https://api.spotify.com/v1/search?q=${artista}&type=artist&limit=18`,{headers:this.headers})
-                    .pipe(map((data:any)=>{
-                      return data.artists.items;
-                    }));
+  getItem(artista:string){
+    return this.http.get(`https://api.spotify.com/v1/search?query=${artista}&type=show%2Ctrack%2Cartist&market=US`,{headers:this.headers});
+                    
    }
    jalarArtista(id:string){
      console.log(id);

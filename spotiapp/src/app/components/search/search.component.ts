@@ -9,12 +9,17 @@ import { SpotifyService } from 'src/app/services/spotify.service';
 })
 export class SearchComponent implements OnInit {
   public time:any;
+  public noArtists:boolean=false;
+  public noPodcasts:boolean=false;
+  public noTracks:boolean=false;
+  public tracks:any = [];
   public value:string = '';
+  public img:string = '';
   public alert_message:boolean =false;
   public error_message:string = '';
   public error_busqueda:boolean = false;
   public cargando=false;
-  public artistas:any = [];
+  public items:any = [];
   constructor(
     private spotify:SpotifyService,
     private _router:Router
@@ -28,10 +33,36 @@ export class SearchComponent implements OnInit {
       this.cargando = true;
       this.error_busqueda = false;
       this.time = setTimeout(() => {
-        this.spotify.getArtist(artista).subscribe((artista:any)=>{
-          this.artistas = artista;
-          if(this.artistas.length>0){
+        this.spotify.getItem(artista).subscribe((artista:any)=>{
+          this.items = artista;
+          console.log(artista)
+          if(this.items.artists.items==0){
+            this.noArtists = true;
+            console.log('efe');
+          }else{
+            this.noArtists = false;
+          }
+          if(this.items.shows.items==0){
+            this.noPodcasts = true;
+          }else{
+            this.noPodcasts = false;
+          }
+          if(this.items.tracks.items==0){
+            this.noTracks = true;
+          }else{
+            this.noTracks = false;
+          }
+          if(this.items.artists.items.length>0 || this.items.tracks.items.length>0 || this.items.shows.items.length>0){
             this.cargando=false;
+            this.tracks = this.items.tracks.items;
+            console.log(this.tracks)
+            this.tracks.forEach((track:any) => {
+              let uri;
+              uri = track.uri.replace(/:/g,'/');
+              uri = uri.replace('spotify','');
+              uri = 'https://open.spotify.com/embed'+uri;
+              track.uri = uri;
+            });
           }else{
             this.error_busqueda = true;
           }

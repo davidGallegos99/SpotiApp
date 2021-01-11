@@ -1,0 +1,21 @@
+.search{
+    margin-top: -30px;
+}
+.cancion{
+    width: 100%;
+    height: auto;
+    background-color:rgb(34, 33, 33);
+    border-radius: 3px;
+    padding: 20px 20px;
+    transition: 0.2s;
+}
+.cancion > p:first-of-type{
+    font-size: 30px;
+}
+.banda{
+    margin-top: -30px;
+}
+.canciones{
+    height: 250px;
+    overflow-y: scroll;
+}
