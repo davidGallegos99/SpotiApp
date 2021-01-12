@@ -1,9 +1,14 @@
 import "@angular/compiler";
+import { IconDefinition } from '@ant-design/icons-angular';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { AccountBookFill, AlertFill, AlertOutline,PlayCircleTwoTone } from '@ant-design/icons-angular/icons';
+const icons: IconDefinition[] = [ AccountBookFill, AlertOutline, AlertFill,PlayCircleTwoTone ];
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +24,7 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlbumComponent } from './components/album/album.component';
+import { PodcastComponent } from './components/podcast/podcast.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +37,7 @@ import { AlbumComponent } from './components/album/album.component';
     TarjetaComponent,
     DomsecurePipe,
     AlbumComponent,
+    PodcastComponent,
     
   ],
   imports: [
@@ -41,7 +48,8 @@ import { AlbumComponent } from './components/album/album.component';
     NzAlertModule,
     BrowserAnimationsModule,
     NzCardModule,
-    NzBadgeModule
+    NzBadgeModule,
+    NzIconModule.forRoot(icons),
   ],
   providers: [BrowserModule,BrowserAnimationsModule
   ],

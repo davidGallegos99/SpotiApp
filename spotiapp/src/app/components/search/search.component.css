@@ -9,8 +9,15 @@
     padding: 20px 20px;
     transition: 0.2s;
 }
+.cancion:hover{
+    background-color: rgb(46, 44, 44);
+}
 .cancion > p:first-of-type{
     font-size: 30px;
+    cursor: pointer;
+}
+.contenedor-cancion:hover{
+    cursor: pointer;
 }
 .banda{
     margin-top: -30px;
@@ -18,4 +25,11 @@
 .canciones{
     height: 250px;
     overflow-y: scroll;
+    border: 1px solid white;
+    border-radius: 3px;
+}
+
+.canciones::-webkit-scrollbar-thumb{
+    border-radius: 40px;
+    background: red;
 }

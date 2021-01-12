@@ -18,6 +18,7 @@ export class ArtistaComponent implements OnInit {
   public topTracks:any = [];
   public cargando:boolean = true;
   constructor(private spotify:SpotifyService,private activatedRoute:ActivatedRoute,private _router: Router) {
+    this.spotify.getNewToken();
     this.activatedRoute.params.subscribe((params)=>{
       this.id = params.id;
       this.getArtist();

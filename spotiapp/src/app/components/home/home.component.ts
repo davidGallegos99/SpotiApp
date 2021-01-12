@@ -12,20 +12,24 @@ export class HomeComponent implements OnInit {
   public alert_error:boolean = false;
   public cargando:boolean = true;
   public error_message:string ='';
-  constructor(private spotify:SpotifyService,private _router:Router) { }
-
+  constructor(private spotify:SpotifyService,private _router:Router) { 
+    this.spotify.getNewToken();
+    setTimeout(() => {
+      this.spotify.getNewReleases().subscribe((data:any)=>{
+        this.newReleases = data;
+        if(this.newReleases.length>0) {
+          this.cargando=false;
+        }
+      },(error)=>{
+        this.alert_error = true;
+        this.cargando = false;
+        this.error_message = error.error.error.message;
+        console.log(error);
+      });
+    }, 2000);
+  }
+  
   ngOnInit(): void {
-    this.spotify.getNewReleases().subscribe((data:any)=>{
-      this.newReleases = data;
-      if(this.newReleases.length>0) {
-        this.cargando=false;
-      }
-    },(error)=>{
-      this.alert_error = true;
-      this.cargando = false;
-      this.error_message = error.error.error.message;
-      console.log(error);
-    });
   }
   verArtista(item:any){
     let idArtist = '';

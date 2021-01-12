@@ -23,9 +23,14 @@ export class SearchComponent implements OnInit {
   constructor(
     private spotify:SpotifyService,
     private _router:Router
-    ) { }
+    ) { 
+      this.spotify.getNewToken();
+    }
 
   ngOnInit(): void {
+  }
+  verAlbum(id:string){
+    this._router.navigate(['album',id]);
   }
   buscarArtista(artista:string){
     if(artista.length>0){
@@ -79,5 +84,8 @@ export class SearchComponent implements OnInit {
     console.log(item.id);
     this._router.navigate(['artista',item.id]);
    }
+  showPodcast(item:any){
+    this._router.navigate(['podcast',item.id]);
+  }
 
 }

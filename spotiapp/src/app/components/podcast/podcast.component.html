@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div *ngIf="!cargando" class="col-md-12">
+        <div class="row justify-content-center">
+            <div class="col-7 col-sm-7 col-md-4 text-center">
+                <img [src]="podcast.images | noimage" width="100%" height="100%" class="podcast-logo img-fluid img-album"  alt="">
+            </div>
+            <div class="col-md-7 text-left ml-0 ml-md-4">
+                <p class="text-light mt-5 podcast text-center text-md-left text-lg-left font-weight-bold">Podcast</p>
+                <h1 class="display-5 pb-3 text-light text-center text-md-left text-lg-left nombre">{{podcast.name}}</h1>
+                <p class="text-light text-center text-md-left text-lg-left publisher">{{podcast.publisher}}</p>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5 pt-3">
+            <div class="col-md-8 order-2 order-md-1">
+                <p class="lead font-weight-bold text-light">Todos los episodios ({{podcast.total_episodes}})</p>
+                <div *ngFor="let episode of podcast.episodes.items" class="my-3">
+                    <hr class="bg-secondary">
+                    <div class="d-flex flex-row align-items-center">
+                        <div>
+                            <img [src]="podcast.images | noimage" alt="" class=" rounded" width="100" height="100">
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-light  font-weight-bold">{{episode.name}}</p>
+                            <p class=" text-secondary">{{episode.description.substr(0,80)}}<a style="text-decoration:underline" class="text-light" >...Ver mas</a></p>
+                            <a [href]="episode.uri" target="_blank" nz-icon nzType="play-circle" style="font-size: 40px;"  nzTheme="twotone"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 order-1 order-md-2 mb-5 mb-md-0">
+                <p class="lead text-light font-weight-bold">Informacion</p>
+                <p class="text-justify text-light font-weight-light">{{podcast.description}}</p>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="cargando" class="row animated fadeIn justify-content-center mt-5 pt-5">
+        <div class="col-md-12">
+            <nz-spin nzSimple  [nzSize]="'large'" class="text-center"></nz-spin>
+        </div>
+    </div>
+</div>

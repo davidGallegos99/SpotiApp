@@ -6,7 +6,7 @@ import {map} from 'rxjs/operators';
 })
 export class SpotifyService {
   private headers = new HttpHeaders({
-    'Authorization':'Bearer BQATgi1RQvWcnLEwCMJAEQV6cKFfI9Gm965F3BgaUcSf2leGEEVfD9zhEj-NZjv8M-va-_0g0h0ca0MWOEU',
+    'Authorization':'Bearer BQBzmvqtLFuJTtcR3LzyFuyzctSZSrqYiGcFYob15Y8gWmqKkzpg1zHFkwfawjlJmutNTVcp_Tm_y_W5J9I',
     'Accept': 'application/json',
     'Content-Type': 'application/json'
   });
@@ -16,6 +16,17 @@ export class SpotifyService {
     ) {
 
      }
+  getNewToken(){
+    this.http.get('https://get-token-spotify99.herokuapp.com/spotify/45102a80bf914d2fb740e8b5024ba639/40a6df9532624232876b627651ffc877').subscribe((token:any)=>{
+      this.headers = new HttpHeaders({
+        'Authorization':`Bearer ${token.access_token}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      });
+      console.log(this.headers);
+      return token.access_token;
+    });
+  }
   getNewReleases(){
     return this.http.get('https://api.spotify.com/v1/browse/new-releases',{headers:this.headers})
                     .pipe(map((data:any)=>{
@@ -46,5 +57,8 @@ export class SpotifyService {
    getAlbum(id:string){ 
      return this.http.get(`https://api.spotify.com/v1/albums/${id}?market=US`,{headers:this.headers});
 
+   }
+   getPodcast(id:string){
+    return  this.http.get(`https://api.spotify.com/v1/shows/${id}?market=US`,{headers:this.headers});
    }
 }

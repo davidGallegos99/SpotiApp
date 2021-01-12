@@ -15,7 +15,9 @@ export class AlbumComponent implements OnInit {
       private spotify:SpotifyService,
       private  activatedRoute:ActivatedRoute,
       private _route:Router
-    ) { }
+    ) { 
+      this.spotify.getNewToken();
+    }
 
   ngOnInit(): void {
     this.getAlbum();
