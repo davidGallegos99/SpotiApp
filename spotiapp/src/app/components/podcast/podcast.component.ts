@@ -24,9 +24,7 @@ export class PodcastComponent implements OnInit {
               track.uri = uri;
             });
           }
-          console.log(this.podcast);
         },error=>{
-          console.log(error);
           this._router.navigate(['asdasd']);
         });
       });

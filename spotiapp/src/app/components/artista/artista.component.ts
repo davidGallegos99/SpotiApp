@@ -59,7 +59,6 @@ export class ArtistaComponent implements OnInit {
   }
   getArtistAlbums(id:string){
     this.spotify.getArtistAlbums(id).subscribe(albums=>{
-      console.log(albums);
       this.albums = albums;
     });
   }
@@ -67,7 +66,6 @@ export class ArtistaComponent implements OnInit {
     this._router.navigate(['album',id]);
   }
   showAllTracks(){
-    console.log('ta bien');
     this.allTracks = true;
   }
   showFewTracks(){

@@ -21,7 +21,6 @@ export class AlbumComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAlbum();
-    console.log(this.activatedRoute);
   }
   
   getAlbum(){
@@ -42,7 +41,6 @@ export class AlbumComponent implements OnInit {
         album.tracks.items.forEach((track:any) => {
             this.duration = this.duration + (track.duration_ms/60000);
         });
-        console.log(this.tracks);
       });
     });
   }

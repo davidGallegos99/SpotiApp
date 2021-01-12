@@ -40,10 +40,8 @@ export class SearchComponent implements OnInit {
       this.time = setTimeout(() => {
         this.spotify.getItem(artista).subscribe((artista:any)=>{
           this.items = artista;
-          console.log(artista)
           if(this.items.artists.items==0){
             this.noArtists = true;
-            console.log('efe');
           }else{
             this.noArtists = false;
           }
@@ -60,7 +58,6 @@ export class SearchComponent implements OnInit {
           if(this.items.artists.items.length>0 || this.items.tracks.items.length>0 || this.items.shows.items.length>0){
             this.cargando=false;
             this.tracks = this.items.tracks.items;
-            console.log(this.tracks)
             this.tracks.forEach((track:any) => {
               let uri;
               uri = track.uri.replace(/:/g,'/');
@@ -80,8 +77,6 @@ export class SearchComponent implements OnInit {
     }
   }
   verArtista(item:any){
-    console.log(item);
-    console.log(item.id);
     this._router.navigate(['artista',item.id]);
    }
   showPodcast(item:any){
