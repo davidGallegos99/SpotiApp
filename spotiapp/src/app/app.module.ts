@@ -25,11 +25,22 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlbumComponent } from './components/album/album.component';
 import { PodcastComponent } from './components/podcast/podcast.component';
+/*      FIREBASE     */
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from "src/environments/environment";
+import { LoginComponent } from "./components/login/login.component";
+import { FormsModule,ReactiveFormsModule } from "@angular/forms";
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NgZorroAntdModule } from '@ng-zorro-antd';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    LoginComponent,
     SearchComponent,
     ArtistaComponent,
     NavbarComponent,
@@ -38,20 +49,28 @@ import { PodcastComponent } from './components/podcast/podcast.component';
     DomsecurePipe,
     AlbumComponent,
     PodcastComponent,
-    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ngzorroant
     NzSpinModule,
     NzAlertModule,
+    NzFormModule,
     BrowserAnimationsModule,
     NzCardModule,
     NzBadgeModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireAuthModule,
     NzIconModule.forRoot(icons),
   ],
-  providers: [BrowserModule,BrowserAnimationsModule
+  providers: [BrowserModule,BrowserAnimationsModule,
+    {provide: "spotiapp-6f54d.appspot.com", useValue: 'gs://spotiapp-6f54d.appspot.com/'}
   ],
   bootstrap: [AppComponent]
 })

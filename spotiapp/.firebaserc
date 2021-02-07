@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "spotiapp-6f54d": {
+      "hosting": {
+        "spotiapp": [
+          "spotiapp-6f54d"
+        ]
+      }
+    }
+  }
+}
