@@ -12,7 +12,10 @@
   <form [formGroup]="this.loginForm" class="col-12 d-flex flex-column align-items-center">
       <div class="form-group px-3 col-12 col-xs-5 col-sm-8 col-lg-5">
         <label for=""><i nz-icon nzType="user" nzTheme="outline"></i> Correo</label>
-        <input type="text" placeholder="Correo" formControlName="correo">
+        <div class="d-flex">
+          <input autofocus [ngClass]="this.correo?.invalid && (correo?.dirty || correo?.touched)?'input-error':''" type="text" placeholder="Correo" formControlName="correo">
+          <i *ngIf="correo?.invalid && (correo?.touched || correo?.dirty)" nz-icon nzType="exclamation-circle" nzTheme="outline" class="mt-2 exclamation ml-3"></i>
+        </div>
         <div *ngIf="correo?.hasError('required') && (correo?.touched || correo?.dirty)" class="div-error">
           <p>Por favor ingrese su correo</p>
         </div>
@@ -22,7 +25,10 @@
       </div>
     <div class="form-group px-3 col-12 col-xs-5 col-sm-8 col-lg-5">
       <label for=""><i nz-icon nzType="lock" nzTheme="outline"></i> Contrasena</label>
-      <input type="password" placeholder="Password" formControlName="password">
+      <div class="d-flex">
+        <input [ngClass]="this.password?.invalid && (password?.dirty || password?.touched)?'input-error':''" type="password" placeholder="Password" formControlName="password">
+        <i *ngIf="password?.invalid && (password?.dirty || password?.touched)" nz-icon nzType="exclamation-circle" nzTheme="outline" class="mt-2 exclamation ml-3"></i>
+      </div>
       <div *ngIf="password?.hasError('required') && (password?.touched || password?.dirty)" class="div-error">
         <p>Por favor ingrese su contrasena</p>
       </div>

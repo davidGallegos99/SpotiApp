@@ -6,8 +6,8 @@ import {HttpClientModule} from '@angular/common/http';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { AccountBookFill, AlertFill, AlertOutline,PlayCircleTwoTone, UserOutline, LockOutline } from '@ant-design/icons-angular/icons';
-const icons: IconDefinition[] = [ AccountBookFill, AlertOutline, AlertFill,PlayCircleTwoTone, UserOutline, LockOutline ];
+import { AccountBookFill, AlertFill, AlertOutline,PlayCircleTwoTone, UserOutline, LockOutline, ExclamationCircleOutline } from '@ant-design/icons-angular/icons';
+const icons: IconDefinition[] = [ AccountBookFill, AlertOutline, AlertFill,PlayCircleTwoTone, UserOutline, LockOutline, ExclamationCircleOutline ];
 
 
 

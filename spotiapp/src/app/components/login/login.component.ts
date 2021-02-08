@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from './../../services/login.service';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
     private login: LoginService,
     private db: AngularFirestore,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private modal: NzModalService
     ) {
       this.loginForm = this.fb.group({
         correo: ['',[Validators.required,Validators.email]],
@@ -64,6 +66,31 @@ export class LoginComponent implements OnInit {
       this.login.signIn(correo, password).then( user => {
         console.log(user);
         this.router.navigate(['home']);
+      }).catch( error => {
+        console.log(error);
+        if(error.code === 'auth/too-many-requests') {
+          this.modal.error({
+            nzTitle: '<i>Error</i>',
+            nzContent: '<b>Cuenta deshabilitada temporalmente debido a repetidos intentos erroneos de acceder a la cuenta</b>',
+            nzOkText: 'Aceptar',
+          })
+        }
+
+        if(error.code === 'auth/user-not-found') {
+          this.modal.error({
+            nzTitle: '<i>Error</i>',
+            nzContent: '<b>Email invalido</b>',
+            nzOkText: 'Aceptar',
+          })
+        }
+
+        if(error.code === 'auth/wrong-password') {
+          this.modal.error({
+            nzTitle: '<i>Error</i>',
+            nzContent: '<b>Contrasena incorrecta</b>',
+            nzOkText: 'Aceptar',
+          })
+        }
       });
     }
   }

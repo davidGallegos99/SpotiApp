@@ -30,6 +30,13 @@ input{
   border:none;
   border-radius: 15px;
 }
+.input-error{
+  border: 2px solid rgb(168, 46, 46);;
+}
+.exclamation{
+  font-size: 17px;
+  color: red;
+}
 
 @keyframes fadeIn {
 	from {
