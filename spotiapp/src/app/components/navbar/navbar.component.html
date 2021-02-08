@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav *ngIf="this.auntenticated?.email" class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" routerLink="home">
         <img src="../../../assets/img/banner-ico.png" width="30" height="30" alt="">
         Spotify
@@ -16,6 +16,6 @@
           <a class="nav-link" routerLink="search" routerLinkActive="active">Search</a>
         </li>
       </ul>
-
+      <span  class="mr-4 cursor" (click)="showLogoutModal()" >LogOut</span>
     </div>
   </nav>

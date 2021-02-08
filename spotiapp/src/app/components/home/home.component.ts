@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Component, OnInit } from '@angular/core';
 import{Router} from '@angular/router';
 import { SpotifyService } from 'src/app/services/spotify.service';
@@ -12,7 +13,7 @@ export class HomeComponent implements OnInit {
   public alert_error:boolean = false;
   public cargando:boolean = true;
   public error_message:string ='';
-  constructor(private spotify:SpotifyService,private _router:Router) { 
+  constructor(private spotify:SpotifyService,private _router:Router, private auth: AngularFireAuth) {
     this.spotify.getNewToken();
     setTimeout(() => {
       this.spotify.getNewReleases().subscribe((data:any)=>{
@@ -28,8 +29,15 @@ export class HomeComponent implements OnInit {
       });
     }, 2000);
   }
-  
+
   ngOnInit(): void {
+    this.auth.authState.subscribe(res=>{
+      console.log(res);
+      if (!res) {
+        this._router.navigate(['login']);
+      }
+    })
+
   }
   verArtista(item:any){
     let idArtist = '';

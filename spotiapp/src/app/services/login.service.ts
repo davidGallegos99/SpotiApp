@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { FirebaseApp } from '@angular/fire';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +12,8 @@ import { Observable } from 'rxjs';
 export class LoginService {
   constructor(
     private storage: AngularFireStorage,
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    private auth: AngularFireAuth
   ) {}
   getSpotiLogo() {
     this.db;
@@ -44,6 +47,13 @@ export class LoginService {
         reject(error);
       }
     });
+  }
+
+  signIn(correo: string, password: string){
+    return this.auth.signInWithEmailAndPassword(correo, password);
+  }
+  logout(){
+    return this.auth.signOut();
   }
 
   getRutaImLogo(): Observable<any>{

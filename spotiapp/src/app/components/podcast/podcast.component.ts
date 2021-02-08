@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Component, OnInit } from '@angular/core';
 import {Router,ActivatedRoute} from '@angular/router';
 import { SpotifyService } from 'src/app/services/spotify.service';
@@ -9,7 +10,7 @@ import { SpotifyService } from 'src/app/services/spotify.service';
 export class PodcastComponent implements OnInit {
   public podcast:any = [];
   public cargando:boolean = true;
-  constructor(private activatedRoute:ActivatedRoute,private spotify:SpotifyService,private _router:Router) {
+  constructor(private activatedRoute:ActivatedRoute,private spotify:SpotifyService,private _router:Router,private auth: AngularFireAuth) {
     setTimeout(() => {
       this.activatedRoute.params.subscribe((params)=>{
         this.spotify.getPodcast(params.id).subscribe(podcast=>{
@@ -32,6 +33,12 @@ export class PodcastComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.auth.authState.subscribe(res=>{
+      console.log(res);
+      if (!res) {
+        this._router.navigate(['login']);
+      }
+    })
     this.spotify.getNewToken();
   }
   showPodcast(){

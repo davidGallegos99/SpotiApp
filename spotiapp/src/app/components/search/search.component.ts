@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { SpotifyService } from 'src/app/services/spotify.service';
@@ -22,12 +23,19 @@ export class SearchComponent implements OnInit {
   public items:any = [];
   constructor(
     private spotify:SpotifyService,
-    private _router:Router
-    ) { 
+    private _router:Router,
+    private auth: AngularFireAuth
+    ) {
       this.spotify.getNewToken();
     }
 
   ngOnInit(): void {
+    this.auth.authState.subscribe(res=>{
+      console.log(res);
+      if (!res) {
+        this._router.navigate(['login']);
+      }
+    })
   }
   verAlbum(id:string){
     this._router.navigate(['album',id]);

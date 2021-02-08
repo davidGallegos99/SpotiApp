@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from './../../services/login.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,10 +15,11 @@ export class LoginComponent implements OnInit {
     private login: LoginService,
     private db: AngularFirestore,
     private fb: FormBuilder,
+    private router: Router
     ) {
       this.loginForm = this.fb.group({
         correo: ['',[Validators.required,Validators.email]],
-        password: ['',Validators.required]
+        password: ['',[Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,25}$/)]]
       });
      }
     public loginForm: FormGroup;
@@ -53,6 +55,17 @@ export class LoginComponent implements OnInit {
       // Guardamos en esta propiedad el enlace de la imagen donde ya podemos visualizar la misma
       this.rutaImg = await this.login.obtainImg(res[0].rutaImg);
     });
+  }
+
+  signIn() {
+    if(this.loginForm.valid){
+      const correo = this.correo?.value;
+      const password = this.password?.value;
+      this.login.signIn(correo, password).then( user => {
+        console.log(user);
+        this.router.navigate(['home']);
+      });
+    }
   }
 
 }

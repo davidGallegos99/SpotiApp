@@ -6,8 +6,8 @@ import {HttpClientModule} from '@angular/common/http';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { AccountBookFill, AlertFill, AlertOutline,PlayCircleTwoTone } from '@ant-design/icons-angular/icons';
-const icons: IconDefinition[] = [ AccountBookFill, AlertOutline, AlertFill,PlayCircleTwoTone ];
+import { AccountBookFill, AlertFill, AlertOutline,PlayCircleTwoTone, UserOutline, LockOutline } from '@ant-design/icons-angular/icons';
+const icons: IconDefinition[] = [ AccountBookFill, AlertOutline, AlertFill,PlayCircleTwoTone, UserOutline, LockOutline ];
 
 
 
@@ -33,8 +33,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from "src/environments/environment";
 import { LoginComponent } from "./components/login/login.component";
 import { FormsModule,ReactiveFormsModule } from "@angular/forms";
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { NgZorroAntdModule } from '@ng-zorro-antd';
+import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 
 @NgModule({
   declarations: [
@@ -56,12 +55,11 @@ import { NgZorroAntdModule } from '@ng-zorro-antd';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    ngzorroant
     NzSpinModule,
     NzAlertModule,
-    NzFormModule,
     BrowserAnimationsModule,
     NzCardModule,
+    NzModalModule,
     NzBadgeModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
@@ -69,7 +67,7 @@ import { NgZorroAntdModule } from '@ng-zorro-antd';
     AngularFireAuthModule,
     NzIconModule.forRoot(icons),
   ],
-  providers: [BrowserModule,BrowserAnimationsModule,
+  providers: [BrowserModule,BrowserAnimationsModule,NzModalService,
     {provide: "spotiapp-6f54d.appspot.com", useValue: 'gs://spotiapp-6f54d.appspot.com/'}
   ],
   bootstrap: [AppComponent]
