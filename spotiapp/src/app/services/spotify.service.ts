@@ -17,7 +17,7 @@ export class SpotifyService {
 
      }
   getNewToken(){
-    this.http.get('https://get-token-spotify99.herokuapp.com/spotify/45102a80bf914d2fb740e8b5024ba639/40a6df9532624232876b627651ffc877').subscribe((token:any)=>{
+    this.http.get('https://spoti-token.onrender.com/spotify/45102a80bf914d2fb740e8b5024ba639/40a6df9532624232876b627651ffc877').subscribe((token:any)=>{
       this.headers = new HttpHeaders({
         'Authorization':`Bearer ${token.access_token}`,
         'Accept': 'application/json',
